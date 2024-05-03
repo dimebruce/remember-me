@@ -10,7 +10,7 @@ function App() {
     <>
       <h1>Remember me</h1>
       <div className="video-container">
-        <video controls autoPlay loop className="responsive-video">
+        <video controls autoPlay loop className="responsive-video" controlsList="nodownload" disablePictureInPicture>
           <source src="/video/1.mp4" type="video/mp4" />
         </video>
       </div>
