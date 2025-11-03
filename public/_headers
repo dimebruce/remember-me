@@ -1,0 +1,6 @@
+/video/cheque-720.mp4
+  Cache-Control: public, max-age=31536000, immutable
+/video/cheque-720.webm
+  Cache-Control: public, max-age=31536000, immutable
+/video/poster.jpg
+  Cache-Control: public, max-age=31536000, immutable

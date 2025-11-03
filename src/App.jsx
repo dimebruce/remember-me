@@ -1,21 +1,41 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
+import Starfield from './Starfield';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
-    <>
-      <h1>Remember me</h1>
-      <div className="video-container">
-        <video controls autoPlay loop className="responsive-video" controlsList="nodownload" disablePictureInPicture>
-          <source src="https://melodious-cendol-3a7b9d.netlify.app/cheque2a.mp4" type="video/mp4" />
-        </video>
-      </div>
-    </>
+    <main className="screen">
+      <Starfield />
+
+      <header className="header">
+        <h1 className="title">In Loving Memory</h1>
+        <p className="subtitle">“Remember me”</p>
+        <span className="divider" />
+      </header>
+
+      <section className="center">
+        <div className="video-card">
+          <video
+            className="video"
+            autoPlay
+            muted
+            playsInline
+            loop
+            preload="metadata"
+            poster="/video/poster.jpg"
+          >
+            <source src="/video/cheque-720.webm" type="video/webm" />
+            <source src="/video/cheque-720.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <footer className="footer">
+        {/* <p className="footnote">Toca para activar sonido en tu dispositivo</p> */}
+        <p className="dedication">
+          Hecho con amor por <span className="sig">AGC</span><br />
+          <em>“Qué sería de nosotros sin estos días”</em>
+        </p>
+      </footer>
+    </main>
   );
 }
-
-export default App;

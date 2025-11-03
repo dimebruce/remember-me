@@ -1,55 +1,109 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+:root{
+  --pad: clamp(12px, 4vw, 28px);
+  --radius: 18px;
+  --card-w: min(92vw, 540px);
+  --card-ratio: 9/16;
+  --text: #e6ecff;
+  --muted:#a7b2d8;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%;margin:0;background:#020512}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+
+/* Layout base */
+.screen{
+  min-height:100%;
+  padding: calc(env(safe-area-inset-top) + var(--pad)) var(--pad) calc(env(safe-area-inset-bottom) + var(--pad));
+  position:relative;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  overflow:hidden;
+}
+
+/* STARFIELD ocupa todo y está por detrás del contenido, pero encima del fondo */
+.starfield{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;              /* <- antes -1; ahora se ve detrás de todo */
+  pointer-events:none;
+}
+
+/* Todo el contenido va por encima del starfield */
+.header,.center,.footer{ position:relative; z-index:1; }
+
+/* Título mejorado */
+.header{ text-align:center; margin-bottom:clamp(8px,3vh,22px); }
+.title{
+  margin:0;
+  font-weight:800;
+  font-size:clamp(22px,6.5vw,44px);
+  line-height:1.05;
+  letter-spacing:.3px;
+  background:linear-gradient(180deg,#e8eeff 0%, #9fb5ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:0 2px 18px rgba(90,120,255,.25);
+}
+.subtitle{
+  margin:.35rem 0 0;
+  color:var(--muted);
+  font-size:clamp(12px,3.2vw,16px);
+}
+.divider{
+  display:inline-block;
+  width:min(120px,30vw);
+  height:1px;
+  background:linear-gradient(90deg,transparent,#7fa2ff,transparent);
+  margin:clamp(8px,2.2vh,16px) auto 0;
+  border-radius:999px;
+}
+
+/* Centro */
+.center{ display:grid; place-items:center; }
+
+/* Card del video */
+.video-card{
+  width:var(--card-w);
+  aspect-ratio:var(--card-ratio);
+  background:rgba(10,16,34,.45);
+  border:1px solid rgba(160,190,255,.12);
+  box-shadow:0 12px 60px rgba(14,24,64,.55), inset 0 0 40px rgba(120,160,255,.08);
+  border-radius:var(--radius);
+  overflow:hidden;
+  backdrop-filter:blur(6px);
+}
+
+/* Video rellena manteniendo recorte elegante */
+.video{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Footer */
+.footer{ text-align:center; margin-top:clamp(8px,3.5vh,20px); }
+.footnote{ color:var(--muted); font-size:clamp(11px,3vw,14px); margin:0; }
+
+/* Desktop tweak */
+@media (min-width:900px){
+  .video-card{ --card-w: min(56vw, 640px); }
+}
+
+/* --- Dedicatoria --- */
+.dedication {
+  margin-top: 1rem;
+  color: #9aaee8;
+  font-size: clamp(11px, 3vw, 14px);
+  line-height: 1.4;
   text-align: center;
+  letter-spacing: 0.3px;
+  animation: fadeGlow 5s ease-in-out infinite alternate;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.sig {
+  font-weight: 600;
+  color: #cdd8ff;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.video-container {
-  position: relative;
-  width: 100%;
-  max-width: 800px; /* Define el ancho máximo del contenedor del video */
-  margin: 0 auto; /* Centra el contenedor horizontalmente */
-}
-
-.responsive-video {
-  width: 100%;
-  height: auto; /* Permite que la altura del video se ajuste automáticamente según el ancho */
-  border-radius: 10px;
+@keyframes fadeGlow {
+  0%   { opacity: 0.7; text-shadow: 0 0 6px rgba(120,150,255,0.25); }
+  100% { opacity: 1;   text-shadow: 0 0 12px rgba(160,190,255,0.45); }
 }
